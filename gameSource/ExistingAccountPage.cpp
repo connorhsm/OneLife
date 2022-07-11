@@ -95,7 +95,7 @@ ExistingAccountPage::ExistingAccountPage()
           mTwinCodePasteButton( mainFont, 0, 0, translate( "paste" ) ),
           
           mSpecificButton( mainFont, 0, 0, "SPECIFIC" ),
-          mRandomButton( mainFont, 0, 0, "RANDOM" ),
+          mRandomButton( mainFont, 0, 0, "NORMAL" ),
           mSpawnSeed( mainFont, -360, -176, 10, false, 
                                      "SPAWN CODE:",
                                      NULL,
@@ -1586,7 +1586,7 @@ void ExistingAccountPage::draw( doublePair inViewCenter,
             pos.x = mEmailField.getLeftEdgeX() + mainFont->getFontHeight() * 0.25 * 0.5;
             pos.y += 30 + 16;
             setDrawColor( 1, 1, 1, 1.0 );
-            if( mSpecificButton.isVisible() ) mainFont->drawString( "WHERE TO SPAWN?", pos, alignLeft );
+            if( mSpecificButton.isVisible() ) mainFont->drawString( "HOW TO SPAWN?", pos, alignLeft );
             }
         
         pos = mFriendsButton.getPosition();
