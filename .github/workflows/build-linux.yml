@@ -18,7 +18,9 @@ jobs:
         run: ls
 
       - name: Install dependencies
-        run: ./scripts/PrepareDepencencies.sh
+        run: |
+          ls
+          ./scripts/PrepareDepencencies.sh
       
       - name: Ensure clean
         run: ./scripts/EnsureClean.sh
