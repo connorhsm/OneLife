@@ -15,6 +15,12 @@ jobs:
           repository: connorhsm/build-tools
           path: build-tools
 
+      - name: List
+        run: |
+          ls
+          ls ..
+          ls build-tools
+
       - name: Install dependencies
         run: ./build-tools/scripts/PrepareDepencencies.sh
         shell: bash
