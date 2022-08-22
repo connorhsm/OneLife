@@ -18,8 +18,8 @@ jobs:
         run: scripts/PrepareDependencies.sh
         shell: bash
       
-      - name: Prepare Repositores
-        run: scripts/PrepareRepositores.sh
+      - name: Prepare Repositories
+        run: scripts/PrepareRepositories.sh
         shell: bash
 
       - name: Build Linux
