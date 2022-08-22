@@ -21,7 +21,9 @@ jobs:
           echo "abc"
           ls ..
           echo "xyz"
-          ls build-tools
+          ls build-tools/scripts
+          echo "msv"
+          ls ../..
 
       - name: Install dependencies
         run: build-tools/scripts/PrepareDepencencies.sh
