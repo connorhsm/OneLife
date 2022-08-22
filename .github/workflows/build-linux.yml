@@ -13,24 +13,16 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: connorhsm/build-tools
-          path: build-tools
-
-      - name: List
-        run: |
-          ls
-          echo "abc"
-          ls ..
-          echo "xyz"
-          ls build-tools/scripts
-          echo "msv"
-          ls ../..
+          #path: build-tools
 
       - name: Install dependencies
-        run: build-tools/scripts/PrepareDependencies.sh
+        run: scripts/PrepareDependencies.sh
         shell: bash
       
       - name: Ensure clean
-        run: ./scripts/EnsureClean.sh
+        run: scripts/EnsureClean.sh
+        shell: bash
 
       - name: Build Linux
-        run: ./scripts/BuildAndPostClients.sh linux client master
+        run: scripts/BuildAndPostClients.sh linux client master
+        shell: bash
