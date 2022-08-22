@@ -18,7 +18,9 @@ jobs:
       - name: List
         run: |
           ls
+          echo "abc"
           ls ..
+          echo "xyz"
           ls build-tools
 
       - name: Install dependencies
