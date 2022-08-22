@@ -15,10 +15,7 @@ jobs:
           repository: connorhsm/build-tools
 
       - name: Install dependencies
-        run: |
-          cd ${{ github.workspace }}
-          ls
-          ./scripts/PrepareDepencencies.sh
+        run: bash scripts/PrepareDepencencies.sh
       
       - name: Ensure clean
         run: ./scripts/EnsureClean.sh
