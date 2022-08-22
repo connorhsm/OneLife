@@ -24,7 +24,7 @@ jobs:
           ls build-tools
 
       - name: Install dependencies
-        run: ./build-tools/scripts/PrepareDepencencies.sh
+        run: build-tools/scripts/PrepareDepencencies.sh
         shell: bash
       
       - name: Ensure clean
