@@ -13,14 +13,13 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: connorhsm/build-tools
-          #path: build-tools
 
       - name: Install dependencies
         run: scripts/PrepareDependencies.sh
         shell: bash
       
-      - name: Ensure clean
-        run: scripts/EnsureClean.sh
+      - name: Prepare Repositores
+        run: scripts/PrepareRepositores.sh
         shell: bash
 
       - name: Build Linux
