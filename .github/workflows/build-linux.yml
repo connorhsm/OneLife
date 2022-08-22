@@ -16,7 +16,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd {{ github.workspace }}
+          cd ${{ github.workspace }}
           ls
           ./scripts/PrepareDepencencies.sh
       
