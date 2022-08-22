@@ -14,11 +14,9 @@ jobs:
         with:
           repository: connorhsm/build-tools
 
-      - name: ls
-        run: ls
-
       - name: Install dependencies
         run: |
+          cd {{ github.workspace }}
           ls
           ./scripts/PrepareDepencencies.sh
       
