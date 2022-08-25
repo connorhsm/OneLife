@@ -24,15 +24,15 @@ jobs:
       #   env:
       #     GITHUB_TOKEN: ${{ github.token }}
 
-      - name: Install dependencies
+      - name: Prepare dependencies
         run: scripts/PrepareDependencies.sh
         shell: bash
       
-      - name: Prepare Repositories
+      - name: Prepare repositories
         run: scripts/PrepareRepositories.sh
         shell: bash
 
-      - name: Build Linux
+      - name: Build
         run: scripts/BuildAndPostClients.sh linux client master
         shell: bash
 
@@ -60,15 +60,15 @@ jobs:
       #   env:
       #     GITHUB_TOKEN: ${{ github.token }}
 
-      - name: Install dependencies
+      - name: Prepare dependencies
         run: scripts/PrepareDependencies.sh
         shell: bash
       
-      - name: Prepare Repositories
+      - name: Prepare repositories
         run: scripts/PrepareRepositories.sh
         shell: bash
 
-      - name: Build Linux
+      - name: Build
         run: scripts/BuildAndPostClients.sh windows client master
         shell: bash
 
