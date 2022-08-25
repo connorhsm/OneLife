@@ -18,11 +18,11 @@ jobs:
       - name: Draft release
         id: draft_release
         uses: softprops/action-gh-release@v1
-        draft: true
-        prerelease: false
-        #files: |
-        #  abc
-        #  abc
+          draft: true
+          prerelease: false
+          #files: |
+          #  abc
+          #  abc
 
 
 
