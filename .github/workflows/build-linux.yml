@@ -68,6 +68,12 @@ jobs:
         run: scripts/PrepareRepositories.sh
         shell: bash
 
+      - name: Link libs
+        run: |
+          sudo ln -s /bin/i686-w64-mingw32-g++ /usr/i686-w64-mingw32/bin/g++
+          sudo ln -s /bin/i686-w64-mingw32-gcc /usr/i686-w64-mingw32/bin/gcc
+          sudo ln -s /bin/i686-w64-mingw32-windres /usr/i686-w64-mingw32/bin/windres
+
       - name: Build
         run: scripts/BuildAndPostClients.sh windows client master
         shell: bash
