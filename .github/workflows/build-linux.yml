@@ -49,7 +49,7 @@ jobs:
       - name: Upload build artifact
         uses: kittaakos/upload-artifact-as-is@v0
         with:
-          path: output/2HOL_v*
+          path: output/clientBuilds/2HOL_v*
 
   build-windows:
     runs-on: ubuntu-latest
@@ -80,4 +80,4 @@ jobs:
       - name: Upload build artifact
         uses: kittaakos/upload-artifact-as-is@v0
         with:
-          path: output/2HOL_v*
+          path: output/clientBuilds/2HOL_v*
