@@ -1,15 +1,31 @@
 name: Build Linux
 
 on:
-  # Intended use case, build on all published releases, everything else in place for testing
-  # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#release
-  release:
-    types: ["published"]
   push:
     branches: ["build-action"]
+    tags:
+      - 2HOL_v*
   workflow_dispatch:
 
 jobs:
+  draft-release:
+    name: Draft new release
+    needs:
+      - build-linux
+      - build-windows
+    runs-on: ubuntu-latest
+    steps:
+      - name: Draft release
+        id: draft_release
+        uses: softprops/action-gh-release@v1
+        draft: true
+        prerelease: false
+        #files: |
+        #  abc
+        #  abc
+
+
+
   build-linux:
     runs-on: ubuntu-latest
     steps:
