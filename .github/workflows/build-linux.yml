@@ -16,15 +16,22 @@ jobs:
       - build-windows
     runs-on: ubuntu-latest
     steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: downloads/
+
+      - name: Display structure of downloaded files
+        run: ls -R
+
       - name: Draft release
         id: draft_release
         uses: softprops/action-gh-release@v1
         with:
           draft: true
           prerelease: false
-          #files: |
-          #  abc
-          #  abc
+          files: |
+            downloads/*
 
   build-linux:
     runs-on: ubuntu-latest
