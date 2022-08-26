@@ -31,7 +31,7 @@ jobs:
           draft: true
           prerelease: false
           files: |
-            downloads/*
+            downloads/*/*
 
   build-linux:
     runs-on: ubuntu-latest
