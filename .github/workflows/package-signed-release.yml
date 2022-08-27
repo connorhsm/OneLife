@@ -48,3 +48,13 @@ jobs:
           asset_path: ${{ steps.insert-signed.outputs.PACKAGE }}
           asset_name: ${{ steps.insert-signed.outputs.PACKAGE }}
           asset_content_type: application/zip
+
+      - name: Delete unsigned package
+        uses: mknejp/delete-release-assets@v1
+        with: 
+          token: ${{ github.token }}
+          tag: latest
+          assets: |
+            2HOL_v*_Windows_Unsigned.zip
+            2HOL_Unsigned.exe
+
