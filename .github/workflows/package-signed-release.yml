@@ -6,9 +6,7 @@
 name: Package signed Windows release
 
 on:
-  release:
-    types:
-      - edited
+  workflow-dispatch:
 
 jobs:
   testing:
