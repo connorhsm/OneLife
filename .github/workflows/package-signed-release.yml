@@ -18,7 +18,7 @@ jobs:
         with:
           repo: connorhsm/OneLife
           file: 2HOL_v20291+20220827T135253_Windows_Unsigned.zip
-          regex: true
+          #regex: true
           target: downloads/
 
       - name: Insert signed binary to package
