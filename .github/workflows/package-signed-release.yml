@@ -24,7 +24,8 @@ jobs:
       - name: Insert signed binary to package
         run: |
           ls
-          mv 2HOL_* uploads/
+          ls downloads
+          mv downloads/2HOL_* uploads/
 
       - name: Update release
         id: update_release
