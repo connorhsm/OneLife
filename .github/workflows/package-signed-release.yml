@@ -12,5 +12,7 @@ on:
 
 jobs:
   testing:
-    name: test
-    run: ls
+    runs-on: ubuntu-latest
+    steps:
+      - name: test
+        run: ls
