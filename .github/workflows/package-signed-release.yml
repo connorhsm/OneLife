@@ -56,5 +56,5 @@ jobs:
           tag: ${{ steps.fetch-binary.outputs.version }}
           assets: |
             2HOL_v*_Windows_Unsigned.zip
-            2HOL_Unsigned.exe
+            2HOL_Signed.exe
 
