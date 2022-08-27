@@ -19,12 +19,11 @@ jobs:
           repo: connorhsm/OneLife
           file: 2HOL_.*(Unsigned\.zip|\.exe)
           regex: true
-          target: ./downloads/
+          target: ./
 
       - name: Insert signed binary to package
         id: insert-signed
         run: |
-          sudo apt install zip unzip
           ZIP_NAME=$(echo 2HOL_v*_Windows_Unsigned.zip)
           SHORT_NAME=2HOL_$(echo 2HOL_v*_Windows_Unsigned.zip | cut -d "_" -f 2)
           SIGNED_NAME=$(echo $SHORT_NAME)_Windows_Signed.zip
