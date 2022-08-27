@@ -30,7 +30,7 @@ jobs:
           unzip $ZIP_NAME
           mv 2HOL_Signed.exe $SHORT_NAME/2HOL.exe
           zip -r $SIGNED_NAME $SHORT_NAME
-          echo "::set-output name=PACKAGE::$(echo SIGNED_NAME)"
+          echo "::set-output name=PACKAGE::$SIGNED_NAME"
 
       - name: Update release
         id: update_release
