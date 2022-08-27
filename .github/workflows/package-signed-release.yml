@@ -7,8 +7,7 @@ name: Package signed Windows release
 
 on:
   release:
-    types:
-      - edited
+    types: [edited]
 
 jobs:
   testing:
