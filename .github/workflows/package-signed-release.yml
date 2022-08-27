@@ -1,0 +1,18 @@
+# Purpose
+# Once main release workflow is complete, we manually download the Windows package
+# and sign the exe which is uploaded individually back to the draft release as '2HOL_Signed.exe'
+# This workflow takes the original Windows package and replaces the exe with the signed exe, re-packages and finally uploads back to the release.
+
+name: Package signed Windows release
+
+on:
+  release:
+    types:
+      - edited
+
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: test
+        run: ls
