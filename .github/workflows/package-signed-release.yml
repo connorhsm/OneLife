@@ -17,7 +17,7 @@ jobs:
         uses: dsaltares/fetch-gh-release-asset@1.0.0
         with:
           repo: connorhsm/OneLife
-          file: (2HOL_Signed\.exe)(2HOL_v.*_Windows_Unsigned\.zip)
+          file: (2HOL_v.*_Windows_Unsigned\.zip)
           regex: true
           target: downloads/
 
