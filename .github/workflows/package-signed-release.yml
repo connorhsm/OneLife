@@ -19,6 +19,7 @@ jobs:
           repo: connorhsm/OneLife
           file: 2HOL_
           regex: true
+          target: ./
 
       - name: Insert signed binary to package
         run: |
