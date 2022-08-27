@@ -57,4 +57,3 @@ jobs:
           assets: |
             2HOL_v*_Windows_Unsigned.zip
             2HOL_Signed.exe
-
