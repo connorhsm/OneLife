@@ -27,8 +27,7 @@ jobs:
         with:
           draft: true
           prerelease: false
-          files: |
-            downloads/*/*
+          files: downloads/*/*
 
   build-linux:
     runs-on: ubuntu-latest
@@ -47,7 +46,7 @@ jobs:
         shell: bash
 
       - name: Build
-        run: scripts/BuildAndPostClients.sh linux client master
+        run: scripts/BuildAndPostClients.sh linux client master unsigned
         shell: bash
 
       - name: Upload build artifact
@@ -78,7 +77,7 @@ jobs:
           sudo ln -s /bin/i686-w64-mingw32-windres /usr/i686-w64-mingw32/bin/windres
 
       - name: Build
-        run: scripts/BuildAndPostClients.sh windows client master
+        run: scripts/BuildAndPostClients.sh windows client master unsigned
         shell: bash
 
       - name: Upload build artifact
