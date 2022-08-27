@@ -6,7 +6,7 @@
 name: Package signed Windows release
 
 on:
-  workflow-dispatch:
+  workflow_dispatch:
 
 jobs:
   testing:
