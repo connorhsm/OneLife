@@ -9,8 +9,30 @@ on:
   workflow_dispatch:
 
 jobs:
-  testing:
+  package-signed-windows:
     runs-on: ubuntu-latest
     steps:
-      - name: test
-        run: ls
+      - name: Fetch signed binary
+        id: fetch-binary
+        uses: dsaltares/fetch-gh-release-asset@v1
+          with:
+            repo: connorhsm/OneLife
+            file: 2HOL_Signed.exe|2HOL_v.*_Windows_Unsigned.zip
+            regex: true
+            target: downloads/
+
+      - name: Insert signed binary to package
+        run: |
+          mv 2HOL_v* uploads/
+
+      - name: Update release
+        id: update_release
+        uses: tubone24/update_release@v1
+        env:
+          TAG_NAME: ${{ steps.fetch-binary.outputs.version }}
+
+      - name: Upload signed package
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.update_release.outputs.upload_url }}
+          asset_path: uploads/*
