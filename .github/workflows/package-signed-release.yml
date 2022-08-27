@@ -54,6 +54,10 @@ jobs:
         with: 
           token: ${{ github.token }}
           tag: ${{ steps.fetch-binary.outputs.version }}
+          
+          # WARNING
+          # This is deleting assets attached to releases! Proceed with caution!
+
           assets: |
             2HOL_v*_Windows_Unsigned.zip
             2HOL_Signed.exe
