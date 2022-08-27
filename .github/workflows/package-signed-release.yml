@@ -36,6 +36,7 @@ jobs:
         id: update_release
         uses: tubone24/update_release@v1.3.1
         env:
+          GITHUB_TOKEN: ${{ github.token }}
           TAG_NAME: ${{ steps.fetch-binary.outputs.version }}
 
       - name: Upload signed package
