@@ -2,8 +2,8 @@ name: Prepare new version release
 
 on:
   push:
-    branches:
-      - build-action
+    #branches:
+    #  - build-action
     tags:
       - 2HOL_v*
   workflow_dispatch:
