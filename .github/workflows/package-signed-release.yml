@@ -1,6 +1,7 @@
 # Purpose
-# Main release workflow will upload Windows package and unsigned exe.
-# Manually download and 2HOL_Unsigned.exe, upload as 2HOL_Signed.exe.
+# Main release workflow will upload Windows package and unsigned exe to a draft release.
+# Manually download and sign 2HOL_Unsigned.exe, upload as 2HOL_Signed.exe.
+# Publish the release.
 # Workflow dispatch this workflow to download the Windows package and signed exe assets.
 # Workflow will insert signed exe, delete original package and individual exe's and then upload complete Windows package as 2HOL_v*_Windows_Signed.zip.
 
