@@ -1,0 +1,86 @@
+name: Prepare new version release
+
+on:
+  push:
+    #branches:
+    #  - build-action
+    tags:
+      - 2HOL_v*
+  workflow_dispatch:
+
+jobs:
+  draft-release:
+    name: Draft new release
+    needs:
+      - build-linux
+      - build-windows
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: downloads/
+
+      - name: Draft release
+        id: draft_release
+        uses: softprops/action-gh-release@v1
+        with:
+          draft: true
+          prerelease: false
+          files: downloads/*/*
+
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          repository: connorhsm/build-tools
+
+      - name: Prepare dependencies
+        run: scripts/PrepareDependencies.sh
+        shell: bash
+      
+      - name: Prepare repositories
+        run: scripts/PrepareRepositories.sh
+        shell: bash
+
+      - name: Build
+        run: scripts/BuildAndPostClients.sh linux client master unsigned
+        shell: bash
+
+      - name: Upload build artifact
+        uses: kittaakos/upload-artifact-as-is@v0
+        with:
+          path: output/clientBuilds/2HOL_v*
+
+  build-windows:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          repository: connorhsm/build-tools
+
+      - name: Prepare dependencies
+        run: scripts/PrepareDependencies.sh
+        shell: bash
+      
+      - name: Prepare repositories
+        run: scripts/PrepareRepositories.sh
+        shell: bash
+
+      - name: Link libs
+        run: |
+          sudo ln -s /bin/i686-w64-mingw32-g++ /usr/i686-w64-mingw32/bin/g++
+          sudo ln -s /bin/i686-w64-mingw32-gcc /usr/i686-w64-mingw32/bin/gcc
+          sudo ln -s /bin/i686-w64-mingw32-windres /usr/i686-w64-mingw32/bin/windres
+
+      - name: Build
+        run: scripts/BuildAndPostClients.sh windows client master unsigned
+        shell: bash
+
+      - name: Upload build artifact
+        uses: kittaakos/upload-artifact-as-is@v0
+        with:
+          path: output/clientBuilds/2HOL_*

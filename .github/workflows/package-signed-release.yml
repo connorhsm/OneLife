@@ -1,0 +1,75 @@
+# Purpose
+# Main release workflow will upload Windows package and unsigned exe to a draft release.
+# Manually download and sign 2HOL_Unsigned.exe, upload as 2HOL_Signed.exe.
+# Publish the release.
+# Workflow dispatch this workflow to download the Windows package and signed exe assets.
+# Workflow will insert signed exe, delete original package and individual exe's and then upload complete Windows package as 2HOL_v*_Windows_Signed.zip.
+
+name: Package signed Windows release
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  package-signed-windows:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch signed binary
+        id: fetch-binary
+        uses: dsaltares/fetch-gh-release-asset@1.0.0
+        with:
+          repo: connorhsm/OneLife
+          file: 2HOL_.*(Windows\.zip|Signed\.exe)
+          regex: true
+          target: ./
+
+        # Safety check that the signing process was actually completed, detailed above.
+      - name: Ensure correct assets downloaded
+        run: |
+          test -f 2HOL_Signed.exe || exit 2
+          test -f 2HOL_v*_Windows.zip || exit 2
+
+      - name: Insert signed binary to package
+        id: insert-signed
+        run: |
+          ZIP_NAME=$(echo 2HOL_v*_Windows.zip)
+          SHORT_NAME=2HOL_$(echo 2HOL_v*_Windows.zip | cut -d "_" -f 2)
+          SIGNED_NAME=$(echo $SHORT_NAME)_Windows_Signed.zip
+          unzip $ZIP_NAME
+          mv 2HOL_Signed.exe $SHORT_NAME/2HOL.exe
+          zip -r $SIGNED_NAME $SHORT_NAME
+          echo "::set-output name=PACKAGE::$SIGNED_NAME"
+
+      - name: Update release
+        id: update_release
+        uses: tubone24/update_release@v1.3.1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          TAG_NAME: ${{ steps.fetch-binary.outputs.version }}
+
+      - name: Delete unsigned package
+        # And standalone exe
+        uses: mknejp/delete-release-assets@v1
+        with: 
+          token: ${{ github.token }}
+          tag: ${{ steps.fetch-binary.outputs.version }}
+          
+          # WARNING
+          # This is deleting assets attached to releases! Proceed with caution!
+
+          assets: |
+            2HOL_v*_Windows.zip
+            2HOL_Signed.exe
+            2HOL_Unsigned.exe
+
+      - name: Upload signed package
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.update_release.outputs.upload_url }}
+          asset_path: ${{ steps.insert-signed.outputs.PACKAGE }}
+          asset_name: ${{ steps.insert-signed.outputs.PACKAGE }}
+          asset_content_type: application/zip
