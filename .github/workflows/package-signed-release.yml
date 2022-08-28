@@ -23,6 +23,12 @@ jobs:
           regex: true
           target: ./
 
+        # Safety check that the signing process was actually completed, detailed above.
+      - name: Ensure correct assets downloaded
+        run: |
+          test -f 2HOL_Signed.exe || exit 2
+          test -f 2HOL_v*_Windows.zip || exit 2
+
       - name: Insert signed binary to package
         id: insert-signed
         run: |
