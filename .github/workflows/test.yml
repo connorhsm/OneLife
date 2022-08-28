@@ -1,0 +1,11 @@
+name: testing events
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  runs-on: ubuntu-latest
+  steps:
+    - run: ls
