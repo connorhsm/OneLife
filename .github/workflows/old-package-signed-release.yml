@@ -5,11 +5,9 @@
 # Workflow dispatch this workflow to download the Windows package and signed exe assets.
 # Workflow will insert signed exe, delete original package and individual exe's and then upload complete Windows package as 2HOL_v*_Windows_Signed.zip.
 
-name: Package signed Windows release
+name: Old package signed Windows release
 
 on:
-  release:
-    types: [published]
   workflow_dispatch:
 
 jobs:
