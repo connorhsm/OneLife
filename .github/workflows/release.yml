@@ -39,6 +39,4 @@ jobs:
       # Change to upload direct to GH release
       - name: Dump info
         run: |
-          echo ${{ github.event }}
-          echo ${{ github.event_name }}
-          echo ${{ github.event_path }}
+          echo ${{ github.event.release.upload_url }}
