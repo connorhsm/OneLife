@@ -40,3 +40,5 @@ jobs:
       - name: Dump info
         run: |
           echo ${{ github.event }}
+          echo ${{ github.event_name }}
+          echo ${{ github.event_path }}
