@@ -17,20 +17,20 @@ jobs:
         with:
           repository: connorhsm/build-tools
 
-      - name: Prepare dependencies
-        run: scripts/PrepareDependencies.sh
-        shell: bash
+      #- name: Prepare dependencies
+      #  run: scripts/PrepareDependencies.sh
+      #  shell: bash
       
-      - name: Prepare repositories
-        run: scripts/PrepareRepositories.sh
-        shell: bash
+      #- name: Prepare repositories
+      #  run: scripts/PrepareRepositories.sh
+      #  shell: bash
 
-      - name: Link windows libs
-        if: matrix.build-target == 'windows'
-        run: |
-          sudo ln -s /bin/i686-w64-mingw32-g++ /usr/i686-w64-mingw32/bin/g++
-          sudo ln -s /bin/i686-w64-mingw32-gcc /usr/i686-w64-mingw32/bin/gcc
-          sudo ln -s /bin/i686-w64-mingw32-windres /usr/i686-w64-mingw32/bin/windres
+      #- name: Link windows libs
+      #  if: matrix.build-target == 'windows'
+      #  run: |
+      #    sudo ln -s /bin/i686-w64-mingw32-g++ /usr/i686-w64-mingw32/bin/g++
+      #    sudo ln -s /bin/i686-w64-mingw32-gcc /usr/i686-w64-mingw32/bin/gcc
+      #    sudo ln -s /bin/i686-w64-mingw32-windres /usr/i686-w64-mingw32/bin/windres
 
       #- name: Build client
       #  run: scripts/BuildAndPostClients.sh ${{ matrix.build-target }} client master unsigned
