@@ -1,0 +1,12 @@
+name: test flow
+
+on:
+  release:
+    types: edited
+  workflow_dispatch:
+
+jobs:
+  something:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 1
