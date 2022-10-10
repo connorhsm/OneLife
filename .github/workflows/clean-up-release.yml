@@ -17,3 +17,4 @@ jobs:
             2HOL_v*_Windows.zip
             2HOL_Signed.exe
             2HOL_Unsigned.exe
+          # This intentionally does not match 2HOL_v*_Windows_Signed.zip, as we do not want to delete the signed final release.
