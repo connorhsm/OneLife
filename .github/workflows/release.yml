@@ -2,7 +2,7 @@ name: Release new version
 
 on:
   release:
-    types: [published]
+    types: published
   workflow_dispatch:
 
 jobs:
@@ -36,8 +36,17 @@ jobs:
         run: scripts/BuildAndPostClients.sh ${{ matrix.build-target }} client master unsigned
         shell: bash
 
-      - uses: shogo82148/actions-upload-release-asset@v1
+      - name: Upload client to release
+        uses: shogo82148/actions-upload-release-asset@v1
         with:
           upload_url: ${{ github.event.release.upload_url }}
           # asset_path comes from how the build-tools repo outputs builds
           asset_path: output/clientBuilds/2HOL_*
+
+  call-workflow-package-signed-windows-release:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Call workflow to package windows signed release
+        uses: connorhsm/OneLife/.github/workflows/package-signed-windows-release.yml@master # TO CHANGE
+        
