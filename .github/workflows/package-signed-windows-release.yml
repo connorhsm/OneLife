@@ -9,8 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Sleep for 5 minutes # to allow time for manual signing process
-        run: sleep 300s
+      - name: Sleep # to allow time for manual signing process
+        run: sleep 150s
         shell: bash
 
       # FUTURE: Could we avoid redownloading? Instead of uploading in the calling workflow, just output for this workflow to later upload?
@@ -63,7 +63,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
-          upload_url: ${{ steps.event.release.upload_url }}
+          upload_url: ${{ github.event.release.upload_url }}
           asset_path: ${{ steps.insert-signed.outputs.PACKAGE }}
           asset_name: ${{ steps.insert-signed.outputs.PACKAGE }}
           asset_content_type: application/zip

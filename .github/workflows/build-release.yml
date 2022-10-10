@@ -43,7 +43,7 @@ jobs:
           # asset_path comes from how the build-tools repo outputs builds
           asset_path: output/clientBuilds/2HOL_*
 
-  call-workflow-package-signed-windows-release:
+  package-signed-windows-release:
     needs: build
     uses: connorhsm/OneLife/.github/workflows/package-signed-windows-release.yml@master # TO CHANGE
         
