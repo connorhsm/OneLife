@@ -41,13 +41,6 @@ jobs:
           zip -r $SIGNED_NAME $SHORT_NAME
           echo "::set-output name=PACKAGE::$SIGNED_NAME"
 
-      - name: Update release
-        id: update_release
-        uses: tubone24/update_release@v1.3.1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-          TAG_NAME: ${{ steps.fetch-binary.outputs.version }}
-
       - name: Delete unsigned package artifacts
         uses: mknejp/delete-release-assets@v1
         with: 
