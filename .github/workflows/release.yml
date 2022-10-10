@@ -44,9 +44,6 @@ jobs:
           asset_path: output/clientBuilds/2HOL_*
 
   call-workflow-package-signed-windows-release:
-    runs-on: ubuntu-latest
     needs: build
-    steps:
-      - name: Call workflow to package windows signed release
-        uses: connorhsm/OneLife/.github/workflows/package-signed-windows-release.yml@master # TO CHANGE
+    uses: connorhsm/OneLife/.github/workflows/package-signed-windows-release.yml@master # TO CHANGE
         
