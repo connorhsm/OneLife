@@ -1,0 +1,22 @@
+name: Build diff bundles
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  package-signed-windows-release:
+    runs-on: ubuntu-latest
+    steps:
+
+      - Fetch latest releases from the release assets
+
+      - Fetch the last releases from the previous release, if available
+
+      - If not available, build the previous release (make build workflow reusable)
+
+      - Generate diff bundles
+
+      - Upload diff bundles to latest release
+
+      - Possibly upload diff bundles to server for client download

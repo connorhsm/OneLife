@@ -1,0 +1,19 @@
+name: Clean up release build artifacts
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  clean-up:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete unsigned package artifacts
+        uses: mknejp/delete-release-assets@v1
+        with: 
+          token: ${{ github.token }}
+          tag: ${{ github.event.release.tag_name }}
+          assets: |
+            2HOL_v*_Windows.zip
+            2HOL_Signed.exe
+            2HOL_Unsigned.exe

@@ -9,12 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Sleep # to allow time for manual signing process
+      # To allow time for manual signing process
+      - name: Sleep
         run: sleep 150s
         shell: bash
 
-      # FUTURE: Could we avoid redownloading? Instead of uploading in the calling workflow, just output for this workflow to later upload?
-      # Is the time saved worth it?
+      # LIMITATION: Downloads from the latest release, if a new release occurs between
+      # the time the caller workflow is called and reaching this step, the job will fail.
       - name: Fetch signed binary
         id: fetch-binary
         uses: dsaltares/fetch-gh-release-asset@1.0.0
@@ -40,16 +41,6 @@ jobs:
           mv 2HOL_Signed.exe $SHORT_NAME/2HOL.exe
           zip -r $SIGNED_NAME $SHORT_NAME
           echo "::set-output name=PACKAGE::$SIGNED_NAME"
-
-      - name: Delete unsigned package artifacts
-        uses: mknejp/delete-release-assets@v1
-        with: 
-          token: ${{ github.token }}
-          tag: ${{ steps.fetch-binary.outputs.version }}
-          assets: |
-            2HOL_v*_Windows.zip
-            2HOL_Signed.exe
-            2HOL_Unsigned.exe
 
       - name: Upload signed package
         uses: actions/upload-release-asset@v1

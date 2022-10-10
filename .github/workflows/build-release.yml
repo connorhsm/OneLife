@@ -46,4 +46,14 @@ jobs:
   package-signed-windows-release:
     needs: build
     uses: connorhsm/OneLife/.github/workflows/package-signed-windows-release.yml@master # TO CHANGE
-        
+
+  build-diff-bundles:
+    needs: package-signed-windows-release
+    uses: connorhsm/OneLife/.github/workflows/build-diff-bundles.yml@master # TO CHANGE
+
+  clean-up-release:
+    needs: build-diff-bundles
+    uses: connorhsm/OneLife/.github/workflows/clean-up-release.yml@master # TO CHANGE
+     
+
+# - Push release to reflector and update server?
