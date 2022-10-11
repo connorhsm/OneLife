@@ -1,0 +1,43 @@
+name: Build and upload clients to release
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  build-and-upload:
+    strategy:
+      matrix:
+        build-target: [linux, windows]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout build-tools repo
+        uses: actions/checkout@v3
+        with:
+          repository: connorhsm/build-tools
+
+      - name: Prepare dependencies
+        run: scripts/PrepareDependencies.sh
+        shell: bash
+      
+      - name: Prepare repositories
+        run: scripts/PrepareRepositories.sh
+        shell: bash
+
+      - name: Link windows libs
+        if: matrix.build-target == 'windows'
+        run: |
+          sudo ln -s /bin/i686-w64-mingw32-g++ /usr/i686-w64-mingw32/bin/g++
+          sudo ln -s /bin/i686-w64-mingw32-gcc /usr/i686-w64-mingw32/bin/gcc
+          sudo ln -s /bin/i686-w64-mingw32-windres /usr/i686-w64-mingw32/bin/windres
+
+      - name: Build client
+        run: scripts/BuildAndPostClients.sh ${{ matrix.build-target }} client master unsigned
+        shell: bash
+
+      - name: Upload client to release
+        uses: shogo82148/actions-upload-release-asset@v1
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          # asset_path comes from how the build-tools repo outputs builds
+          asset_path: output/clientBuilds/2HOL_*

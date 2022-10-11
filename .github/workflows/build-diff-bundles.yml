@@ -13,7 +13,7 @@ jobs:
 
       - Fetch the last releases from the previous release, if available
 
-      - If not available, build the previous release (make build workflow reusable)
+      - If not available, build the previous release
 
       - Generate diff bundles
 
