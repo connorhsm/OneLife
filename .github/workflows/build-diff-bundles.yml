@@ -42,12 +42,12 @@ jobs:
 
 
 
-      - Fetch the last releases from the previous release, if available
+      #- Fetch the last releases from the previous release, if available
 
-      - If not available, build the previous release
+      #- If not available, build the previous release
 
-      - Generate diff bundles
+      #- Generate diff bundles
 
-      - Upload diff bundles to latest release
+      #- Upload diff bundles to latest release
 
-      - Possibly upload diff bundles to server for client download
+      #- Possibly upload diff bundles to server for client download
