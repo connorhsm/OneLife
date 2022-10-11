@@ -11,7 +11,7 @@ jobs:
     uses: connorhsm/OneLife/.github/workflows/build-and-upload.yml@master # TO CHANGE
 
   package-signed-windows-release:
-    needs: build
+    needs: build-and-upload
     uses: connorhsm/OneLife/.github/workflows/package-signed-windows-release.yml@master # TO CHANGE
 
   build-diff-bundles:
