@@ -7,19 +7,19 @@ on:
 
 jobs:
 
-  build-and-upload:
+  one:
     uses: connorhsm/OneLife/.github/workflows/build-and-upload.yml@master # TO CHANGE
 
-  package-signed-windows-release:
-    needs: build-and-upload
+  two:
+    needs: one
     uses: connorhsm/OneLife/.github/workflows/package-signed-windows-release.yml@master # TO CHANGE
 
-  build-diff-bundles:
-    needs: package-signed-windows-release
+  three:
+    needs: two
     uses: connorhsm/OneLife/.github/workflows/build-diff-bundles.yml@master # TO CHANGE
 
-  clean-up-release:
-    needs: build-diff-bundles
+  four:
+    needs: three
     uses: connorhsm/OneLife/.github/workflows/clean-up-release.yml@master # TO CHANGE
      
 
