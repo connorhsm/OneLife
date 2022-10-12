@@ -18,27 +18,31 @@ jobs:
           file: 2HOL_v.*_(Linux\.zip|Windows_Signed\.zip)
           regex: true
           target: ./latest/
+      
+      #
+      #   FUTURE IDEA: Instead of building the previous client, fetch them from the past release or download server
+      #
 
-      - name: Fetch previous release tag # We may need to filter later on for the live server tags and if we use tags for beta builds
-        id: fetch-previous-tag
-        run: |
-          TAG=git tag --sort=-creatordate | grep -A 1 ${{ github.event.release.tag_name }} | tail -n 1
-          echo "::set-output name=PREVIOUS_TAG::$TAG"
+      # - name: Fetch previous release tag # We may need to filter later on for the live server tags and if we use tags for beta builds
+      #   id: fetch-previous-tag
+      #   run: |
+      #     TAG=git tag --sort=-creatordate | grep -A 1 ${{ github.event.release.tag_name }} | tail -n 1
+      #     echo "::set-output name=PREVIOUS_TAG::$TAG"
 
-      - name: Fetch previous client packages
-        uses: dsaltares/fetch-gh-release-asset@1.0.0
-        with:
-          repo: connorhsm/OneLife # TO CHANGE
-          version: tags/${{ steps.fetch-previous-tag.outputs.PREVIOUS_TAG }}
-          file: 2HOL_v.*_(Linux\.zip|Windows_Signed\.zip)
-          regex: true
-          target: ./previous/
+      # - name: Fetch previous client packages
+      #   uses: dsaltares/fetch-gh-release-asset@1.0.0
+      #   with:
+      #     repo: connorhsm/OneLife # TO CHANGE
+      #     version: tags/${{ steps.fetch-previous-tag.outputs.PREVIOUS_TAG }}
+      #     file: 2HOL_v.*_(Linux\.zip|Windows_Signed\.zip)
+      #     regex: true
+      #     target: ./previous/
 
-      - name: Ensure assets downloaded
-        run: |
-          test -f 2HOL_v*_Linux.zip || exit 2
-          test -f 2HOL_v*_Windows_Signed.zip || exit 2
-        # If downloaded or not should be output. If true, generate diff bundles. If false, build previous release and then generate diff bundles.
+      # - name: Ensure assets downloaded
+      #   run: |
+      #     test -f 2HOL_v*_Linux.zip || exit 2
+      #     test -f 2HOL_v*_Windows_Signed.zip || exit 2
+      #  # If downloaded or not should be output. If true, generate diff bundles. If false, build previous release and then generate diff bundles.
 
 
 
