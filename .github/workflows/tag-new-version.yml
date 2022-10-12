@@ -1,0 +1,21 @@
+name: Tag new version
+
+on:
+  workflow_dispatch:
+
+jobs:
+  bump-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout build-tools repo
+        uses: actions/checkout@v3
+        with:
+          repository: connorhsm/build-tools
+      
+      - name: Prepare repositories
+        run: scripts/PrepareRepositories.sh
+        shell: bash
+
+      - name: Tag new version
+        run: scripts/TagNewVersion.sh
+        shell: bash
