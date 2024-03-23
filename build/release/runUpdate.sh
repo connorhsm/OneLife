@@ -1,66 +1,18 @@
-# TODO support minorGems
+#######################
+# Usage
+#######################
 
+# Written in the context of an ephemeral miniOneLifeCompile environment
+# (Usually in automation with a fresh environment each time)
 
-##### Note from previous update
-
-
-
-##### Update checklist
-
-# 0 - hetuw changes
-# 0 - compile new hetuw exes in dev folder
-
-# 0 - update picture
-# 0 - update notice
-
-# 0 - run script below until upload
-
-# 0 - release on github
-# 0 - website change
-
-# 0 - MUST clear cache on liveServer
-
-# 0 - move old arts in overlay folder to archive
-
-
-
-##### Pull all repos
-
-# Expected to be run in a miniOneLifeCompile environment
-
-cd OneLife
-git checkout master
-git pull
-cd ..
-
-cd OneLifeData7
-git checkout master
-git pull
-cd ..
-
-cd minorGems
-git checkout master
-git pull
-cd ..
+# TODO 
+# - support minorGems
 
 ##### Version check
 
-# TODO @risvh do we actually need to do this or can we simplify and only check for versions from OneLife and assume every other version is the same?
-
-
 cd OneLife
-lastTaggedCodeVersion=`git for-each-ref --sort=-creatordate --format '%(refname:short)' --count=1 refs/tags/2HOL_v* | sed -e 's/2HOL_v//'`
+lastTaggedVersion=`git for-each-ref --sort=-creatordate --format '%(refname:short)' --count=1 refs/tags/2HOL_v* | sed -e 's/2HOL_v//'`
 cd ..
-
-cd OneLifeData7
-lastTaggedDataVersion=`git for-each-ref --sort=-creatordate --format '%(refname:short)' --count=1 refs/tags/2HOL_v* | sed -e 's/2HOL_v//'`
-cd ..
-
-lastTaggedVersion=$lastTaggedDataVersion
-
-if [ $lastTaggedCodeVersion -gt $lastTaggedDataVersion ]; then
-	lastTaggedVersion=$lastTaggedCodeVersion
-fi
 
 newVersion=$(lastTaggedVersion + 1)
 

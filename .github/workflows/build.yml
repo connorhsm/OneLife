@@ -1,0 +1,28 @@
+name: Build clients
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: risvh/miniOneLifeCompile
+          path: miniOneLifeCompile
+
+        # TODO cache dependencies
+      - run: |
+          cd miniOneLifeCompile
+          ./getDependencies.sh
+          ./cloneRepos.sh
+          ./applyFixesAndOverride.sh
+        # ./compile.sh
+
+      - run: |
+          cp OneLife/scripts/runUpdate.sh .
+      
+      
+      # ls -lah
