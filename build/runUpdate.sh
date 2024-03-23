@@ -1,27 +1,32 @@
+# TODO support minorGems
+
+
 ##### Note from previous update
 
 
 
 ##### Update checklist
 
-0 - hetuw changes
-0 - compile new hetuw exes in dev folder
+# 0 - hetuw changes
+# 0 - compile new hetuw exes in dev folder
 
-0 - update picture
-0 - update notice
+# 0 - update picture
+# 0 - update notice
 
-0 - run script below until upload
+# 0 - run script below until upload
 
-0 - release on github
-0 - website change
+# 0 - release on github
+# 0 - website change
 
-0 - MUST clear cache on liveServer
+# 0 - MUST clear cache on liveServer
 
-0 - move old arts in overlay folder to archive
+# 0 - move old arts in overlay folder to archive
 
 
 
 ##### Pull all repos
+
+# Expected to be run in a miniOneLifeCompile environment
 
 cd OneLife
 git checkout master
@@ -40,6 +45,9 @@ cd ..
 
 ##### Version check
 
+# TODO @risvh do we actually need to do this or can we simplify and only check for versions from OneLife and assume every other version is the same?
+
+
 cd OneLife
 lastTaggedCodeVersion=`git for-each-ref --sort=-creatordate --format '%(refname:short)' --count=1 refs/tags/2HOL_v* | sed -e 's/2HOL_v//'`
 cd ..
@@ -50,12 +58,11 @@ cd ..
 
 lastTaggedVersion=$lastTaggedDataVersion
 
-if [ $lastTaggedCodeVersion -gt $lastTaggedDataVersion ]
-then
+if [ $lastTaggedCodeVersion -gt $lastTaggedDataVersion ]; then
 	lastTaggedVersion=$lastTaggedCodeVersion
 fi
 
-newVersion=$((lastTaggedVersion + 1))
+newVersion=$(lastTaggedVersion + 1)
 
 
 ##### Bump dataVersionNumber
@@ -92,12 +99,19 @@ cd ..
 
 ##### Make the game folders
 
+# TODO debug
 ./miniOneLifeCompile/repo/freeLockedRepo.sh
 
+# TODO
 newVersion=20311
 lastTaggedVersion=20310
+
+# TODO
 lastTaggedCodeVersion=$lastTaggedVersion
 lastTaggedDataVersion=$lastTaggedVersion
+
+
+# Build last version
 
 git -C OneLife checkout 2HOL_v$lastTaggedCodeVersion
 git -C OneLifeData7 checkout 2HOL_v$lastTaggedDataVersion
@@ -105,6 +119,9 @@ cd miniOneLifeCompile
 ./repo/makeFullGameFolderForRelease.sh 1
 ./repo/makeFullGameFolderForRelease.sh 5
 cd ..
+
+
+# Build new version
 
 git -C OneLife checkout 2HOL_v$newVersion
 git -C OneLifeData7 checkout 2HOL_v$newVersion
@@ -115,6 +132,8 @@ cd ..
 
 
 ##### copy cache files to old version
+
+# TODO loop loop
 
 cp cache.fcz 2HOL_v${lastTaggedCodeVersion}_linux/animations
 cp cache.fcz 2HOL_v${lastTaggedCodeVersion}_linux/categories
@@ -128,6 +147,7 @@ cp cache.fcz 2HOL_v${lastTaggedCodeVersion}_win/objects
 cp cache.fcz 2HOL_v${lastTaggedCodeVersion}_win/sprites
 cp cache.fcz 2HOL_v${lastTaggedCodeVersion}_win/transitions
 
+# TODO ??
 ##### check that settings is the same between versions
 
 ##### Generate the patches with diffBundle
@@ -136,8 +156,16 @@ cd minorGems/game/diffBundle
 ./diffBundleCompile
 cd ../../..
 
-./minorGems/game/diffBundle/diffBundle 2HOL_v${lastTaggedVersion}_linux 2HOL_v${newVersion}_linux ${newVersion}_inc_linux.dbz
-./minorGems/game/diffBundle/diffBundle 2HOL_v${lastTaggedVersion}_win 2HOL_v${newVersion}_win ${newVersion}_inc_win.dbz
+./minorGems/game/diffBundle/diffBundle \
+  2HOL_v${lastTaggedVersion}_linux \
+  2HOL_v${newVersion}_linux \
+  ${newVersion}_inc_linux.dbz
+
+./minorGems/game/diffBundle/diffBundle \
+  2HOL_v${lastTaggedVersion}_win \
+  2HOL_v${newVersion}_win \
+  ${newVersion}_inc_win.dbz
+
 echo -n "http://play.twohoursonelife.com/downloads/patches/${newVersion}_inc_linux.dbz" > ${newVersion}_inc_linux_urls.txt
 echo -n "http://play.twohoursonelife.com/downloads/patches/${newVersion}_inc_win.dbz" > ${newVersion}_inc_win_urls.txt
 
@@ -149,6 +177,9 @@ echo -n "<?php \$version=${newVersion}; ?>" > requiredVersion.php
 
 zip -r 2HOL_linux_v${newVersion}.zip 2HOL_v${newVersion}_linux
 zip -r 2HOL_win_v${newVersion}.zip 2HOL_v${newVersion}_win
+
+
+# TODO Split up into new script from here
 
 
 ##### Upload zips
@@ -169,6 +200,7 @@ scp latest.txt ubuntu@play.twohoursonelife.com:/var/www/web.twohoursonelife.com/
 scp requiredVersion.php ubuntu@play.twohoursonelife.com:/var/www/web.twohoursonelife.com/OneLifeWeb/data/diffDownloads/patches
 
 
+# TODO
 # write new version number if server is not recompiled
 echo -n 20303 > dataVersionNumber.txt
 
@@ -177,6 +209,7 @@ echo -n 20303 > dataVersionNumber.txt
 
 # announcement
 
+# TODO sleep
 echo -n 'Server update in 5 minutes! Check our discord for more information.' > settings/customGlobalMessage.ini
 echo -n 'Server update in 1 minute! Check our discord for more information.' > settings/customGlobalMessage.ini
 echo -n 1 > settings/customGlobalMessageOn.ini
